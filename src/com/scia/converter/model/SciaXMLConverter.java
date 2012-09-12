@@ -19,7 +19,6 @@ import com.scia.converter.xml.scia.Project;
 
 public class SciaXMLConverter {
 
-	private DataSet rqNetXML;
 	private Project sciaXML;
 	
 	public SciaXMLConverter() {
@@ -45,9 +44,9 @@ public class SciaXMLConverter {
 	private Double getColumnHeight() throws SciaXMLConverterException{
 		Double maxColumnHeight = 0.0;
 		
-		if (this.rqNetXML != null){
+		if (DataSummary.rqNetXML != null){
 			ArrayList<Double> columnsH = new ArrayList<Double>();
-			List<Column> columns = this.rqNetXML.getColumns();
+			List<Column> columns = DataSummary.rqNetXML.getColumns();
 			
 			if (columns != null && columns.size() > 0){
 				for (Column column : columns) {
@@ -72,9 +71,9 @@ public class SciaXMLConverter {
 	private Double getClearBay() throws SciaXMLConverterException{
 		Double clearBay = 0.0;
 		
-		if (this.rqNetXML != null){
+		if (DataSummary.rqNetXML != null){
 			ArrayList<Double> clearBays = new ArrayList<Double>();
-			List<Elevation> elevations = this.rqNetXML.getElevations();
+			List<Elevation> elevations = DataSummary.rqNetXML.getElevations();
 			
 			if (elevations != null && elevations.size() > 0){
 				for (Elevation elevation : elevations) {
@@ -99,9 +98,9 @@ public class SciaXMLConverter {
 	private Double  getColumnSpace() throws SciaXMLConverterException{
 		Double columnSpace = 0.0;
 		
-		if (this.rqNetXML != null){
+		if (DataSummary.rqNetXML != null){
 			ArrayList<Double> columnSpaces = new ArrayList<Double>();
-			List<FrameLine> framelines = this.rqNetXML.getFramelines();
+			List<FrameLine> framelines = DataSummary.rqNetXML.getFramelines();
 			
 			if (framelines != null && framelines.size() > 0){
 				for (FrameLine frameline : framelines) {
@@ -126,8 +125,8 @@ public class SciaXMLConverter {
 	private List<Double> getLevelElevations() throws SciaXMLConverterException{
 		ArrayList<Double> levalElevations = new ArrayList<Double>();
 		
-		if (this.rqNetXML != null){
-			List<Level> levels = this.rqNetXML.getLevels();
+		if (DataSummary.rqNetXML != null){
+			List<Level> levels = DataSummary.rqNetXML.getLevels();
 			
 			if (levels != null && levels.size() > 0){
 				for (Level level : levels) {
@@ -257,14 +256,6 @@ public class SciaXMLConverter {
 	
 	private void convertFrontBeams(Double clearBay, List<Double> levelElevations){}
 	private void convertBackBeams(Double clearBay, Double columnSpace, List<Double> levelElevations){}
-	
-	public DataSet getRqNetXML() {
-		return rqNetXML;
-	}
-
-	public void setRqNetXML(DataSet rqNetXML) {
-		this.rqNetXML = rqNetXML;
-	}
 
 	public Project getSciaXML() {
 		return sciaXML;

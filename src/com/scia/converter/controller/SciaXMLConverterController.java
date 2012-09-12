@@ -1,248 +1,140 @@
 package com.scia.converter.controller;
-///*
-// * To change this template, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package com.scia.converter.controller;
-//
-//import java.io.File;
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//
-//import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.fxml.Initializable;
-//import javafx.scene.Scene;
-//import javafx.scene.control.ProgressBar;
-//import javafx.scene.control.TextField;
-//import javafx.scene.layout.AnchorPane;
-//import javafx.stage.DirectoryChooser;
-//import javafx.stage.FileChooser;
-//import javafx.stage.Stage;
-//
-//import javax.swing.JOptionPane;
-//
-//import br.com.scia.xml.dao.RepositorioPecas;
-//import br.com.scia.xml.dao.RepositorioProjeto;
-//import br.com.scia.xml.entity.exception.RepositorioPecasException;
-//import br.com.scia.xml.entity.exception.SciaXMLFileManagerException;
-//import br.com.scia.xml.entity.exception.SciaXMLValidationException;
-//import br.com.scia.xml.util.SciaXMLConstantes;
-//import br.com.scia.xml.util.SciaXMLFileManager;
-//import br.com.scia.xml.view.SciaXMLStarter;
-//
-//public class SplashController implements Initializable{
-//	
-//	public static final String fxml = "SciaXMLSplash.fxml";
-//	public static Stage stage;
-//	
-//	@FXML
-//	TextField nome;
-//	@FXML
-//	TextField sigla;
-//	@FXML
-//	TextField diretorio;
-//	@FXML
-//	ProgressBar progressBar;
-//	
-//	@FXML
-//	public void escolherDiretorio(){		
-//		DirectoryChooser directoryChooser = new DirectoryChooser();
-//        
-//		File f = directoryChooser.showDialog(null);
-//		
-//		if (f != null){
-//			this.diretorio.setText(f.getPath());  
-//			
-//			if (RepositorioPecas.pecas.size() == 0)
-//				carregarArquivos(f);
-//		}
-//	}
-//	
-//	private void carregarArquivos (File f){
-//		try {
-//			this.diretorio.setText(f.getPath());  
-//			File[] arquivos = f.listFiles();
-//			
-//			if (arquivos != null && arquivos.length > 0){
-//				for (File file: arquivos) {
-//					RepositorioPecas.addPeca(file);
-//				}
-//				this.progressBar.setProgress(1.0);
-//			}
-//		} catch (RepositorioPecasException e) {
-//			JOptionPane.showMessageDialog(null, e.getMessage(),SciaXMLConstantes.TITLE_VALIDACAO,JOptionPane.ERROR_MESSAGE);
-//		} 
-//	}
-//	
-//	@FXML
-//	public void abrirProjeto(){
-//		FileChooser fileChooser = new FileChooser();
-//		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SciaXML Files", "*.sxml");
-//        fileChooser.getExtensionFilters().add(extFilter);
-//        
-//        File file = fileChooser.showOpenDialog(null);
-//        
-//        if (file != null){
-//        	try {
-//				RepositorioProjeto.projeto = SciaXMLFileManager.carregarProjeto(file);
-//				
-//				if (RepositorioProjeto.projeto != null){
-//					RepositorioProjeto.projeto.setNomeArquivo(file.getAbsolutePath());
-//					
-//					this.nome.setText(RepositorioProjeto.projeto.getNomeProjeto());
-//					this.sigla.setText(RepositorioProjeto.projeto.getSiglaProjeto());
-//					this.diretorio.setText(RepositorioProjeto.projeto.getDiretorioPecas());
-//					
-//					File diretorio = new File(this.diretorio.getText());
-//					
-//					if (diretorio != null){
-//						File[] arquivos = diretorio.listFiles();
-//						if (arquivos != null && arquivos.length > 0){
-//							for (File f : arquivos) {
-//								RepositorioPecas.addPeca(f);
-//							}
-//							this.progressBar.setProgress(1.0);
-//						}
-//					}
-//				}
-//			} catch (SciaXMLFileManagerException e) {
-//				e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, e.getMessage(),SciaXMLConstantes.TITLE_VALIDACAO,JOptionPane.ERROR_MESSAGE);
-//			} catch (RepositorioPecasException e) {
-//				e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, e.getMessage(),SciaXMLConstantes.TITLE_VALIDACAO,JOptionPane.ERROR_MESSAGE);
-//			}
-//        }		
-//	}
-//	
-//	@FXML
-//	public void carregarProjeto(){		
-//		try {			
-//			validarCamposSplash();
-//			
-//			RepositorioProjeto.projeto.setNomeProjeto(this.nome.getText());
-//			RepositorioProjeto.projeto.setSiglaProjeto(this.sigla.getText());
-//			RepositorioProjeto.projeto.setDiretorioPecas(this.diretorio.getText());
-//			
-//			File file = null;
-//			
-//			if (RepositorioProjeto.projeto.getNomeArquivo() == null){
-//				FileChooser fc = new FileChooser();
-//				FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SciaXML Files", "*.sxml");
-//				fc.getExtensionFilters().add(extFilter);
-//		        
-//				file = fc.showSaveDialog(null);
-//			}else{
-//				file = new File(RepositorioProjeto.projeto.getNomeArquivo());
-//				
-//				if (!file.exists()){
-//					FileChooser fc = new FileChooser();
-//					FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SciaXML Files", "*.sxml");
-//					fc.getExtensionFilters().add(extFilter);
-//			        
-//					file = fc.showSaveDialog(null);
-//				}
-//			}
-//			
-//			if (RepositorioPecas.pecas.size() == 0){
-//				File diretorioPeca = new File (RepositorioProjeto.projeto.getDiretorioPecas());
-//				carregarArquivos(diretorioPeca);
-//			}
-//			
-//			if (file != null){
-//				String nome = file.getAbsolutePath();
-//				
-//				File f;
-//				
-//				if (!nome.endsWith(SciaXMLConstantes.SXML))
-//					f = new File(nome + SciaXMLConstantes.SXML);
-//				else
-//					f = new File(nome);
-//				
-//				RepositorioProjeto.projeto.setNomeArquivo(f.getAbsolutePath());
-//				
-//				SciaXMLFileManager.salvarProjeto(f);
-//				
-//				PrincipalController.stage = new Stage();
-//				PrincipalController.loadPage();
-//						
-//				PrincipalController.stage.show();
-//				
-//				SplashController.stage.close();
-//			}
-//		}
-//		catch (SciaXMLValidationException e) {			
-//			JOptionPane.showMessageDialog(null, e.getMessage(),SciaXMLConstantes.TITLE_VALIDACAO,JOptionPane.ERROR_MESSAGE);
-//		}
-//		catch (SciaXMLFileManagerException e) {
-//			JOptionPane.showMessageDialog(null, e.getMessage(),SciaXMLConstantes.TITLE_VALIDACAO,JOptionPane.ERROR_MESSAGE);
-//		}		
-//	}
-//	
-//	private void validarCamposSplash() throws SciaXMLValidationException{
-//
-//		String mensagem = null;
-//		
-//		if ("".equals(this.nome.getText())){
-//			this.nome.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_ERROR);
-//			this.nome.setFocusTraversable(true);
-//			mensagem = SciaXMLConstantes.CAMPOS_EM_OBRIGATORIOS;
-//		}else {
-//			this.nome.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_OK);
-//		}
-//		
-//		if ("".equals(this.sigla.getText())){
-//			this.sigla.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_ERROR);
-//			this.sigla.setFocusTraversable(true);
-//			mensagem = SciaXMLConstantes.CAMPOS_EM_OBRIGATORIOS;
-//		}else {
-//			this.sigla.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_OK);
-//		}
-//		
-//		if ("".equals(this.diretorio.getText())){
-//			this.diretorio.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_ERROR);
-//			this.diretorio.setFocusTraversable(true);
-//			mensagem = SciaXMLConstantes.CAMPOS_EM_OBRIGATORIOS;
-//		}else {
-//			if (RepositorioPecas.pecas.size() == 0)
-//				mensagem = SciaXMLConstantes.NENHUM_ARQUIVO_PECA;
-//			else				
-//				this.diretorio.getStyleClass().add(SciaXMLConstantes.CSS_FIELD_OK);
-//		}
-//			
-//		
-//		if (mensagem != null)
-//			throw new SciaXMLValidationException(mensagem);
-//		
-//	}
-//
-//	@FXML
-//	public void sair(){
-//		SplashController.stage.close();
-//	}
-//	
-//	@FXML
-//	public void abrirSobre(){		
-//		// TODO: Implementar popup com os dados do sistema
-//	}
-//	
-//	public static void loadPage(){
-//		try{
-//			AnchorPane page = (AnchorPane) FXMLLoader.load(SciaXMLStarter.class.getResource(fxml));
-//	        
-//	        Scene scene = new Scene(page);
-//	        SplashController.stage.setScene(scene);
-//	        SplashController.stage.setTitle("SciaXML");
-//	        SplashController.stage.setResizable(false);
-//	        SplashController.stage.show();
-//	        
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//    }
-//}
+
+import java.io.File;
+import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import javax.swing.JOptionPane;
+
+import com.scia.converter.bean.DataSummary;
+import com.scia.converter.exception.SciaXMLConverterException;
+import com.scia.converter.model.SciaXMLConverter;
+import com.scia.converter.util.SciaXMLConstants;
+import com.scia.converter.util.SciaXMLFileManager;
+import com.scia.converter.view.SciaXMLConverterStarter;
+
+public class SciaXMLConverterController implements Initializable{
+	
+	public static final String fxml = "SciaXMLConverter.fxml";
+	public static Stage stage;
+	
+	@FXML
+	TextField fileIn;
+	@FXML
+	TextField fileOut;
+	@FXML
+	ProgressBar progress;
+	
+	@FXML
+	public void chooseFileIn(){		
+		FileChooser fc = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("RQNet Files", "*.xml");
+		fc.getExtensionFilters().add(extFilter);
+        
+		File f = fc.showOpenDialog(null);
+		
+		if (f != null){
+			try {
+				SciaXMLFileManager.convertRQNetFile(f);
+				this.fileIn.setText(f.getAbsolutePath());
+				this.progress.setProgress(1.0);
+			} catch (SciaXMLConverterException e) {
+				JOptionPane.showMessageDialog(null, SciaXMLConstants.NOT_A_VALID_FILE,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	
+	@FXML
+	public void chooseFileOut(){		
+		FileChooser fc = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Scia Engineer File", "*.xml");
+		fc.getExtensionFilters().add(extFilter);
+        
+		File f = fc.showSaveDialog(null);
+				
+		if (f != null){
+			this.fileOut.setText(f.getAbsolutePath());
+		}
+	}
+	
+	@FXML
+	public void onCancel(){		
+		JOptionPane.setDefaultLocale(Locale.US);
+		if (JOptionPane.showConfirmDialog(null, SciaXMLConstants.CONFIRMATION_MESSAGE) == 0)
+			SciaXMLConverterController.stage.close();
+	}
+	
+	@FXML
+	public void onConvert(){
+		
+		if ("".equals(this.fileIn.getText().toString())){
+			JOptionPane.showMessageDialog(null, SciaXMLConstants.NO_INPUT_FILE_CHOOSED,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
+		} else if ("".equals(this.fileOut.getText().toString())){
+			JOptionPane.showMessageDialog(null, SciaXMLConstants.NO_OUTPUT_FILE_CHOOSED,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
+		}else{
+			SciaXMLConverter converter = new SciaXMLConverter();
+			
+			if (DataSummary.rqNetXML != null){
+				try {
+					converter.convertFiles();
+				} catch (SciaXMLConverterException e) {
+					JOptionPane.showMessageDialog(null, SciaXMLConstants.NOT_A_VALID_FILE,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
+	
+	@FXML
+	public void onExit(){
+		JOptionPane.setDefaultLocale(Locale.US);
+		if (JOptionPane.showConfirmDialog(null, SciaXMLConstants.CONFIRMATION_MESSAGE) == 0)
+			SciaXMLConverterController.stage.close();
+	}
+	
+	@FXML
+	public void onAbout(){
+		JOptionPane.setDefaultLocale(Locale.US);
+		JOptionPane.showMessageDialog(null, SciaXMLConstants.UNDER_CONTRUCTION);
+	}
+	
+	public static void loadPage(){
+		try{
+			AnchorPane page = (AnchorPane) FXMLLoader.load(SciaXMLConverterStarter.class.getResource(fxml));
+	        
+	        Scene scene = new Scene(page);
+	        SciaXMLConverterController.stage.setScene(scene);
+	        SciaXMLConverterController.stage.setTitle("SciaXMLConverter");
+	        SciaXMLConverterController.stage.setResizable(false);
+	        SciaXMLConverterController.stage.show();
+	        
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+
+	@Override
+	protected void finalize() throws Throwable {
+		JOptionPane.setDefaultLocale(Locale.US);
+		if (JOptionPane.showConfirmDialog(null, SciaXMLConstants.CONFIRMATION_MESSAGE) == 0){
+			SciaXMLConverterController.stage.close();
+			super.finalize();
+		}
+	}
+    
+    
+}

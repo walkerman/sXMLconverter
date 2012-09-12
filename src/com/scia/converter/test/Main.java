@@ -3,6 +3,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import com.scia.converter.bean.DataSummary;
 import com.scia.converter.exception.SciaXMLConverterException;
 import com.scia.converter.model.SciaXMLConverter;
 import com.scia.converter.xml.rqnet.DataSet;
@@ -19,11 +20,10 @@ public class Main {
 		try {
 			File imageFile = new File(xmlFile.toURI());
 			
-			DataSet m2 = (DataSet) stream.fromXML(imageFile);
-			System.out.println(m2.toString());
+			DataSummary.rqNetXML = (DataSet) stream.fromXML(imageFile);
+			System.out.println(DataSummary.rqNetXML.toString());
 			
 			SciaXMLConverter converter = new SciaXMLConverter();
-			converter.setRqNetXML(m2);
 			
 			try {
 				converter.convertFiles();

@@ -9,12 +9,25 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 
+import com.scia.converter.bean.DataSummary;
 import com.scia.converter.exception.SciaXMLConverterException;
+import com.scia.converter.xml.rqnet.DataSet;
 import com.scia.converter.xml.scia.Project;
 import com.thoughtworks.xstream.XStream;
 
 public class SciaXMLFileManager {
 
+	public static void convertRQNetFile (File file) throws SciaXMLConverterException{
+		try{
+			XStream stream = new XStream();
+			stream.processAnnotations(DataSet.class);
+			DataSummary.rqNetXML = (DataSet) stream.fromXML(file);
+			System.out.println(DataSummary.rqNetXML.toString());
+		}catch (Exception e) {
+			throw new SciaXMLConverterException();			
+		}
+	}
+	
 	public static void project2XML(Project p, File f) throws SciaXMLConverterException {
 		try {
 			if (p != null && f != null) {

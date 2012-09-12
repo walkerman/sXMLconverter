@@ -52,4 +52,14 @@ public class SciaXMLConstants {
 	public static final String XML = ".xml";
 	public static final String DEFAULT_DEF_FILE = "default.xml.def";
 	public static final String DEFAULT_COLUMN_TYPE = "";
+	
+	
+	// Validation Messages
+	public static final String SCIAXML_VALIDATION = "SciaXMLConverter Validation";
+	public static final String UNDER_CONTRUCTION = "Under Construction";
+	public static final String CONFIRMATION_MESSAGE = "Are you sure you want to leave SciaXMLConverter?";
+	public static final String NOT_A_VALID_FILE = "This is not a valid file. Please choose a different one.";
+	public static final String NO_INPUT_FILE_CHOOSED = "Please choose the input file.";
+	public static final String NO_OUTPUT_FILE_CHOOSED = "Please set the output file.";
+	public static final String CONVERTION_ISSUES = "Problems to convert files. Please check the scia.log file.";
 }

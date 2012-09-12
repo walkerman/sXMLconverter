@@ -3,8 +3,11 @@ package com.scia.converter.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.scia.converter.xml.rqnet.DataSet;
+
 public class DataSummary {
 	
+	public static DataSet rqNetXML;
 	public static List<Part> finalParts;
 	public static List<Node> finalNodes;
 	public static Integer partsIndex;
