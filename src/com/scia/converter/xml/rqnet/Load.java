@@ -1,4 +1,4 @@
-package br.com.scia.converter.bean;
+package com.scia.converter.xml.rqnet;
 
 public class Load {
 	private String AuthorID;

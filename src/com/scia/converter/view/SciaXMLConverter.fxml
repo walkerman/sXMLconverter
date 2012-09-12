@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0000999999975" prefWidth="324.0" xmlns:fx="http://javafx.com/fxml" fx:controller="br.com.scia.xml.controller.SplashController">
+  <children>
+    <Label layoutX="32.0" layoutY="170.0" text="RQNet Input File">
+      <font>
+        <Font name="Calibri Bold" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <TextField fx:id="diretorio" layoutX="32.0" layoutY="182.0" prefWidth="232.0" />
+    <Button layoutX="269.0" layoutY="182.0" mnemonicParsing="false" onAction="#escolherDiretorio" text="..." />
+    <TextField id="diretorio" layoutX="32.0" layoutY="223.0" prefWidth="232.0" />
+    <Button layoutX="269.0" layoutY="223.0" mnemonicParsing="false" onAction="#escolherDiretorio" text="..." />
+    <Button layoutX="187.0" layoutY="259.0" mnemonicParsing="false" onAction="#abrirProjeto" text="Cancel" />
+    <Button layoutX="241.0" layoutY="259.0" mnemonicParsing="false" onAction="#carregarProjeto" text="Convert" />
+    <MenuBar prefWidth="325.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#sair" text="Exit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#abrirSobre" text="About SciaXML Converter" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <Label layoutX="22.0" layoutY="310.0" text="Developed by Conninf Technology Solutions - Copyright 2012">
+      <font>
+        <Font name="Calibri" size="11.0" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="32.0" layoutY="211.0" text="Scia Output File" />
+    <ImageView fitHeight="100.30189514160156" fitWidth="253.14288826143593" layoutX="32.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="file:/C:/SciaUS/scia_converter.PNG" preserveRatio="false" smooth="false" />
+      </image>
+    </ImageView>
+  </children>
+</AnchorPane>
