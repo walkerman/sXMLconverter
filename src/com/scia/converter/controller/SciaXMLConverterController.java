@@ -2,6 +2,7 @@ package com.scia.converter.controller;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,8 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 import com.scia.converter.bean.DataSummary;
+import com.scia.converter.bean.Node;
+import com.scia.converter.bean.Part;
 import com.scia.converter.exception.SciaXMLConverterException;
 import com.scia.converter.model.SciaXMLConverter;
 import com.scia.converter.util.SciaXMLConstants;
@@ -77,6 +80,11 @@ public class SciaXMLConverterController implements Initializable{
 	
 	@FXML
 	public void onConvert(){
+		DataSummary.finalNodes = new ArrayList<Node>();
+		DataSummary.finalParts = new ArrayList<Part>();
+		
+		File fileOut = new File(this.fileOut.getText());
+		DataSummary.sciaXML = fileOut;
 		
 		if ("".equals(this.fileIn.getText().toString())){
 			JOptionPane.showMessageDialog(null, SciaXMLConstants.NO_INPUT_FILE_CHOOSED,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
@@ -88,6 +96,8 @@ public class SciaXMLConverterController implements Initializable{
 			if (DataSummary.rqNetXML != null){
 				try {
 					converter.convertFiles();
+					
+					JOptionPane.showMessageDialog(null,  SciaXMLConstants.CONVERTION_OK,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.INFORMATION_MESSAGE);
 				} catch (SciaXMLConverterException e) {
 					JOptionPane.showMessageDialog(null, SciaXMLConstants.NOT_A_VALID_FILE,SciaXMLConstants.SCIAXML_VALIDATION,JOptionPane.ERROR_MESSAGE);
 				}

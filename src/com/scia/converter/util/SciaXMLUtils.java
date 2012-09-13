@@ -7,6 +7,14 @@ import com.scia.converter.xml.scia.Project;
 
 public class SciaXMLUtils {
 
+	public static String getUUID (){
+		//return UUID.randomUUID().toString();
+		
+		//return Long.toOctalString(Double.doubleToLongBits(Math.random() * 1.0000));
+		
+		return "Test";
+	}
+	
 	public static Double parseValue (String value){
 		Double doubleValue = 0.0;
 		if (value != null && !"".equals(value)){

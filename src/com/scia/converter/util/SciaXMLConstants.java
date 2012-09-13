@@ -51,13 +51,16 @@ public class SciaXMLConstants {
 	public static final String DEF = ".def";
 	public static final String XML = ".xml";
 	public static final String DEFAULT_DEF_FILE = "default.xml.def";
-	public static final String DEFAULT_COLUMN_TYPE = "";
-	
+	public static final String DEFAULT_COLUMN_TYPE = "col - C3X3.5";
+	public static final String DEFAULT_BEAM_TYPE = "beam - C3X3.5";
+	public static final String INDEX_NODE = "N";
+	public static final String INDEX_BEAM = "B";
 	
 	// Validation Messages
 	public static final String SCIAXML_VALIDATION = "SciaXMLConverter Validation";
 	public static final String UNDER_CONTRUCTION = "Under Construction";
 	public static final String CONFIRMATION_MESSAGE = "Are you sure you want to leave SciaXMLConverter?";
+	public static final String CONVERTION_OK = "Files were successfully converted.";
 	public static final String NOT_A_VALID_FILE = "This is not a valid file. Please choose a different one.";
 	public static final String NO_INPUT_FILE_CHOOSED = "Please choose the input file.";
 	public static final String NO_OUTPUT_FILE_CHOOSED = "Please set the output file.";

@@ -8,6 +8,7 @@ import com.scia.converter.bean.DataSummary;
 import com.scia.converter.bean.Node;
 import com.scia.converter.bean.Part;
 import com.scia.converter.util.SciaXMLConstants;
+import com.scia.converter.util.SciaXMLUtils;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -30,6 +31,7 @@ public class Project {
 	public Project(String fileName) {
 		
 		if (fileName != null){
+			this.uuid = SciaXMLUtils.getUUID();
 			this.xmlns = SciaXMLConstants.XMLNS;
 			this.def = new Definition(fileName+SciaXMLConstants.DEF);
 			this.containers = new ArrayList<Container>();
@@ -96,7 +98,7 @@ public class Project {
 			o.setP2(new ObjectItem(null,String.valueOf(peca.getFinalNode().getId() + this.uuid),String.valueOf(peca.getFinalNode().getId() + this.uuid),null,null,null));
 			
 			ObjectItem item = new ObjectItem();
-			item.setV(peca.getId());
+			item.setV(peca.getId() + this.uuid);
 			if (peca.getType() != null){
 				String valor = peca.getType();
 				item.setN(valor);
